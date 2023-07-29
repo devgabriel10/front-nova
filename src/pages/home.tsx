@@ -17,6 +17,10 @@ function Home() {
         ? <Header showHeader={showHeader} />
         : <></>
       }
+      {localStorage.setItem('firstname', 'Adam')}
+      {localStorage.setItem('lastname', 'silver')}
+      {localStorage.clear()}
+      {console.log(localStorage.length)}
       <div id="home-main">
         <Article />
         <Form />

@@ -35,7 +35,6 @@ body {
   order: 1;
   background-image: url(/src/assets/back.jpg);
   background-size: 105%;
-  width: 900px;
   flex-flow: column wrap;
   justify-content: center;
   text-align: start;
@@ -44,7 +43,7 @@ body {
 #home-form-container {
   display: flex;
   order: 2;
-  width: 465px;
+  width: 345px;
   flex-direction: column;
   justify-content: center;
   text-align: center;

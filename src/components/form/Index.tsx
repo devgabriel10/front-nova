@@ -4,7 +4,7 @@ import Input from './Input';
 import Button from '../Button';
 import logo from '/home/cliente/Documentos/controle-empresas/front/src/assets/logo.jpeg';
 import '/home/cliente/Documentos/controle-empresas/front/src/css/Index.css';
-import { Link } from 'react-router-dom';
+import { Link, json } from 'react-router-dom';
 
 export type FormState = {
   login: string,
@@ -19,6 +19,7 @@ export function Form() {
 
   const [formData, setFormData] = useState(formEmpty);
   const [verifyPassword, setVerifyPassword] = useState(false);
+  const [checkboxLembrarSenha, setcheckboxLembrarSenha] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => (
@@ -41,14 +42,21 @@ export function Form() {
 
   const registerButton = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    <Link to="/login" />
     if (checkForm()) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Serviço cadastrado com sucesso',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      <Link to="/login" />
+      if (checkForm() && checkboxLembrarSenha) {
+        const obj = {
+          login: formData.login,
+          senha: formData.senha,
+        }
+        let usuariosLoginSalvo = [obj];
+        if (localStorage.length === 0) {
+          localStorage.setItem('usuariosLoginSalvo', JSON.stringify(obj));
+        } else {
+          usuariosLoginSalvo = JSON.parse(localStorage.getItem('usuariosLoginSalvo'));
+          JSON.stringify(localStorage.setItem('usuariosLoginSalvo,', usuariosLoginSalvo));
+        }
+      }
     } else {
       Swal.fire({
         icon: 'error',
@@ -60,6 +68,10 @@ export function Form() {
 
   const showVerifyPassword = () => {
     setVerifyPassword(!verifyPassword);
+  }
+
+  const lembrarSenha = () => {
+    setcheckboxLembrarSenha(!checkboxLembrarSenha);
   }
 
   return (
@@ -139,6 +151,7 @@ export function Form() {
                   <Input
                     type="checkbox"
                     id="home-checkbox-password-remember"
+                    onChange={lembrarSenha}
                   />
                 </div>
               </div>
